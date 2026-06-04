@@ -1,0 +1,6 @@
+{
+  "name": "Sevanta",
+  "description": "منصة سيفانتا للسمسرة البحرية والعتاد البحري - وساطة موثوقة وتجارة بلا حدود",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
