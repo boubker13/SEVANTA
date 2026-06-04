@@ -95,8 +95,8 @@ export default function SeaAdvisor({ listings, lang }: SeaAdvisorProps) {
             : "Observe the transom plate for stress hairline fractures, look for oily discharges in water trails, and check lower unit seals.";
 
           tips = isAr 
-            ? ["المحركات الخارجية Yamaha و Suzuki هي الأقل أعطالاً في السوق العربي والخليجي المالح", "احرص على غسل نظام التبريد الخارجي بالماء العذب بعد كل إبحار لمنع تكلس الملح"]
-            : ["Yamaha & Suzuki offer widest parts networks across Mediterranean ports", "Flush heat exchangers with raw freshwater post every trip to mitigate limestone build"];
+            ? ["المحركات الخارجية Yamaha و Suzuki هي الأقل أعطالاً في السوق الجزائري والساحل المتوسطي المالح", "احرص على غسل نظام التبريد الخارجي بالماء العذب بعد كل إبحار لموانئ الجزائر منعاً لتكلس الملح"]
+            : ["Yamaha & Suzuki offer widest parts networks across Algerian port cities (Algiers, Oran, Bejaia)", "Flush heat exchangers with raw freshwater post every trip to mitigate limestone build in Mediterranean waters"];
         } else {
           responseStr = isAr 
             ? "سؤال وجيه تفضله بحارة سيفانتا! بصفة عامة، عند تقصي العتاد الملاحي والصيد التجاري، ننصح بالمعاينة داخل الحوض الجاف (Dry Dock). يجب تفقد الصدأ الجلفاني تحت خط المياه، والتأكد من صمامات دخول مياه البحر للتبريد (Seacocks) وخلوها من التكلس الملحى والمعدات القانونية مثل طفايات الحريق ورادارات رصد الحركة غارمن."
@@ -131,8 +131,8 @@ export default function SeaAdvisor({ listings, lang }: SeaAdvisorProps) {
         </h2>
         <p className="text-xs text-slate-500 mt-1">
           {isAr 
-            ? "اسأل الخبير الآلي لسيفانتا عن توافقية المحركات، خطوات صيانة اليخوت وسفن الصيد في البحر المتوسط والخليج العربي." 
-            : "Ask questions regarding boat mechanical overhaul, fuel separators, and licensing in regional ports."}
+            ? "اسأل الخبير الآلي لسيفانتا عن توافقية المحركات، خطوات صيانة اليخوت وسفن الصيد في البحر الأبيض المتوسط والساحل الجزائري." 
+            : "Ask questions regarding boat mechanical overhaul, fuel separators, and licensing in Algerian ports."}
         </p>
       </div>
 

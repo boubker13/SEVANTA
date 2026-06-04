@@ -102,16 +102,16 @@ export default function MediationPane({ listings, selectedListing, lang }: Media
         const estMid = Math.round((listPrice + buyerOffer) / 2);
         setSuggestionPrice(estMid);
         setProposalDescription(isAr 
-          ? `تقوم سيفانتا بدور الوسيط والسمسار المضمون لتسوية الفجوة وقدرها ($${(listPrice - buyerOffer).toLocaleString()}) بين المشتري وبائع العتاد البحري. نرى أن قيمة التراضي العادلة مع مراعاة الحالة الفنية والتسليم في ميناء محايد هي قيمة متزنة تصون أرباح الطرفين.`
-          : `Sevanta acting as neutral surveyor & marine broker compromises a standard difference of $${listPrice - buyerOffer} between listing and counter-offer. A recommended compromise of $${estMid.toLocaleString()} helps secure prompt legal seals.`
+          ? `تقوم سيفانتا بدور الوسيط والسمسار المضمون لتسوية الفجوة وقدرها (${(listPrice - buyerOffer).toLocaleString()} د.ج) بين المشتري وبائع العتاد البحري. نرى أن قيمة التراضي العادلة مع مراعاة الحالة الفنية والتسليم بموانئ الجزائر (مثل ميناء بوهارون أو وهران الجديد) هي قيمة متزنة تصون أرباح الطرفين.`
+          : `Sevanta acting as neutral surveyor & marine broker compromises a standard difference of DZD ${(listPrice - buyerOffer).toLocaleString()} between listing and counter-offer. A recommended compromise of DZD ${estMid.toLocaleString()} helps secure prompt legal seals.`
         );
         setBuyerDraftMessage(isAr 
-          ? `أهلاً بك يا صديقي المالك الكريم. نشكر حسن تواصلك. نحن جادون في التقدم للشراء والبدء بإسناد العقد لوساطة سيفانتا. نقترح تصفية متوسط السعر ليكون $${estMid.toLocaleString()} كقرار نهائي، على أن نبدأ بالمعاينة الفنيّة المشتركة بمجرد تواجدنا بالبند المذكور.`
-          : `Hello owner. Thank you for standardizing specifications. We are highly motivated buyers. We propose a final middle-point price of $${estMid.toLocaleString()} via Sevanta escrow program with standard hull ultrasound checks.`
+          ? `أهلاً بك يا صديقي المالك الكريم. نشكر حسن تواصلك. نحن جادون في التقدم للشراء والبدء بإسناد العقد لوساطة سيفانتا بالجزائر. نقترح تصفية متوسط السعر ليكون ${estMid.toLocaleString()} د.ج كقرار نهائي، على أن نبدأ بالمعاينة الفنيّة المشتركة بمجرد تواجدنا بالبند المذكور.`
+          : `Hello owner. Thank you for standardizing specifications. We are highly motivated buyers. We propose a final middle-point price of DZD ${estMid.toLocaleString()} via Sevanta escrow program with standard hull ultrasound checks.`
         );
         setSellerDraftMessage(isAr 
-          ? `مرحباً بالزميل المشتري العزيز في ميادين سيفانتا. نقدّر اقتراح الأسعار الجاد ونوافق على تخفيض السعر الأساسي لتسوية الميزانية لتبلغ $${estMid.toLocaleString()} تيسيراً للمعاملة البحرية وتسهيلاً للبدء بصياغة عقود تمليك الموانئ.`
-          : `Hello prospective buyer. Thank you for your reasonable query. We respect your technical observations and would accept settling at $${estMid.toLocaleString()} through Sevanta Mediation Escrow to facilitate cargo handovers.`
+          ? `مرحباً بالزميل المشتري العزيز في ميادين سيفانتا بالجزائر. نقدّر اقتراح الأسعار الجاد ونوافق على تخفيض السعر الأساسي لتسوية الميزانية لتبلغ ${estMid.toLocaleString()} د.ج تيسيراً للمعاملة البحرية وتسهيلاً للبدء بصياغة عقود تمليك الموانئ.`
+          : `Hello prospective buyer. Thank you for your reasonable query. We respect your technical observations and would accept settling at DZD ${estMid.toLocaleString()} through Sevanta Mediation Escrow to facilitate cargo handovers.`
         );
         setSurveyRequirement(isAr
           ? "اختبار ضغط اسطوانات المحرك (Engine Compression/Blow-by Test) وفحص سماكة الهيكل الحديدي بالسونار لمنع الصدأ الكهرومغناطيسي قبل ختم الصفقة."
@@ -167,7 +167,7 @@ export default function MediationPane({ listings, selectedListing, lang }: Media
           {/* Pricing Row */}
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">{isAr ? "سعر العرض المطلب ($):" : "Listed Asking ($):"}</label>
+              <label className="block text-xs font-bold text-slate-700 mb-1">{isAr ? "سعر العرض المطلوب (د.ج):" : "Listed Asking (DZD):"}</label>
               <input 
                 type="number"
                 disabled
@@ -176,7 +176,7 @@ export default function MediationPane({ listings, selectedListing, lang }: Media
               />
             </div>
             <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">{isAr ? "عرض المشتري المقترح ($):" : "Buyer Counters ($):"}</label>
+              <label className="block text-xs font-bold text-slate-700 mb-1">{isAr ? "عرض المشتري المقترح (د.ج):" : "Buyer Counters (DZD):"}</label>
               <input 
                 type="number"
                 required
@@ -259,7 +259,7 @@ export default function MediationPane({ listings, selectedListing, lang }: Media
               <div className="bg-gradient-to-r from-slate-900 to-indigo-950 text-white rounded-2xl p-5 shadow-lg border-l-4 border-indigo-500 flex items-center justify-between">
                 <div>
                   <span className="text-[10px] text-indigo-300 font-bold block uppercase tracking-wider">{isAr ? "السعر الوسطي المقترح لإنهاء الصفقة" : "SEVANTA SUGGESTED COMPROMISE PRICE"}</span>
-                  <strong className="text-3xl font-black text-white font-mono block mt-1">${suggestionPrice.toLocaleString()}</strong>
+                  <strong className="text-3xl font-black text-white font-mono block mt-1">{suggestionPrice.toLocaleString()} {isAr ? "د.ج" : "DZD"}</strong>
                   <span className="text-xs text-slate-300 mt-1 block">
                     {isAr ? "حل توافقي يصون حقوق المالك وقدرة المشتري" : "Provides comfortable security standard boundaries"}
                   </span>

@@ -99,7 +99,7 @@ export default function ListingDetailModal({ listing, lang, onClose, onAction }:
                     {isAr ? "القيمة المطلوبة" : "Asking Value"}
                   </span>
                   <div className="text-3xl font-extrabold text-slate-950 font-mono mt-1">
-                    ${listing.price.toLocaleString()}
+                    {listing.price.toLocaleString()} {isAr ? "د.ج" : "DZD"}
                   </div>
                   <span className="text-[10px] text-slate-500 block mt-0.5">
                     {isAr ? "سعر غير شامل ضريبة الميناء" : "Exotic terminal rates exclude handling"}

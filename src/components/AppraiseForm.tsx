@@ -110,18 +110,18 @@ export default function AppraiseForm({ listings, selectedListing, lang }: Apprai
           estimatedValueMax: estMax,
           confidenceScore: 88,
           reviewNotes: isAr 
-            ? `بناءً على مقاييس وساطة سيفانتا البحرية، تم فحص البينات الفنية لـ (${title || "العتاد المدخل"}). لقد قمنا بتحليل سنة الموديل (${year}) والحالة العامة (${condition === 'used_excellent' ? 'ممتاز جداً' : 'جيد وبحاجة لتفقد بسيط'}). تبين أن العتاد يقع ضمن منحنى الطلب الطبيعي للموانئ المتوسطية والخليجية.`
-            : `Following Sevanta Marine Evaluation guidelines regarding asset (${title || "Custom gear"}), manufactured in ${year} under condition ${condition}. The structural specs align standard maritime tolerances for fishing and maritime crafts.`,
+            ? `بناءً على مقاييس وساطة سيفانتا البحرية الجزائرية، تم فحص البينات الفنية لـ (${title || "العتاد المدخل"}). لقد قمنا بتحليل سنة الموديل (${year}) والحالة العامة (${condition === 'used_excellent' ? 'ممتاز جداً' : 'جيد وبحاجة لتفقد بسيط'}). تبين أن العتاد يقع ضمن منحنى الطلب الطبيعي بموانئ الجزائر (مثل وهران، تيبازة، العاصمة، بجاية وعنابة).`
+            : `Following Algerian Sevanta Marine Evaluation guidelines regarding asset (${title || "Custom gear"}), manufactured in ${year} under condition ${condition}. The structural specs align standard maritime tolerances for fishing and maritime crafts in Algerian ports (Oran, Algiers, Bejaia, Annaba).`,
           pros: isAr 
-            ? ["الطلب الإقليمي مرتفع على فئة العتاد هذه", "سنة الصنع حديثة وتضمن كفاءة ميكانيكة جيدة", "معدل استهلاك الطاقة أو الوقود يقع ضمن النطاق المقبول"]
-            : ["Strong regional demand for specified marine category", "Structural stats indicate high seaworthiness margin", "Fuel economy index falls within standard operating margins"],
+            ? ["الطلب بالساحل الجزائري مرتفع على هذه الفئة من العتاد", "سنة الصنع تضمن أداءً ميكانيكياً ممتازاً بموانئنا", "معدل استهلاك الديزل يطابق معايير الملاحة الإقليمية"]
+            : ["Strong demand on the Algerian coast for specified marine category", "Structural stats indicate high seaworthiness margin", "Fuel economy index falls within standard operating margins"],
           cons: isAr
-            ? ["يتطلب فحص كاثودات الحماية من الصدأ (sacrificial anodes)", "صمامات الصدر وغرفة الميكانيك بحاجة لمعاينة ضغط", "ينصح بتحديث أنظمة الرادار الخارجية"]
-            : ["Anodes check and zinc treatment advised promptly", "Engine compression verification recommended", "Navigation firmware can benefit from security upgrades"],
+            ? ["يتطلب فحص كاثودات الحماية من الصدأ (sacrificial anodes) في المياه المالحة", "صمامات الصدر وغرفة الميكانيك بحاجة لمعاينة ضغط بمرافق الصيانة الجزائرية", "ينصح بتطوير الرادار للتجوال الخارجي"]
+            : ["Anodes check and zinc treatment advised promptly for Mediterranean waters", "Engine compression verification recommended", "Navigation firmware can benefit from local security updates"],
           marketDemandRating: "High",
           brokerRecommendation: isAr
-            ? "نوصي بعرض هذا العتاد بقيمة ابتدائية تقارب المدى الأوسط المحدد أدناه والالتزام بعقود وساطة سيفانتا لضمان سرعة المعاملات والتوثيق القانوني."
-            : "We advise aligning prompt offers with mid range metrics. Rely strictly on Sevanta secured mediation contracts for smooth transits."
+            ? "نوصي بعرض هذا العتاد بقيمة ابتدائية تقارب المدى الأوسط المحدد أدناه والالتزام بعقود وساطة سيفانتا لضمان سرعة المعاملات بموانئ الجزائر."
+            : "We advise aligning prompt offers with mid range metrics. Rely strictly on Sevanta Algerian secured mediation contracts for smooth transits."
         };
         setReport(localReport);
         setErrorNotice(isAr 
@@ -233,7 +233,7 @@ export default function AppraiseForm({ listings, selectedListing, lang }: Apprai
               </select>
             </div>
             <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">{isAr ? "السعر المستهدف ($):" : "Target Valuation ($):"}</label>
+              <label className="block text-xs font-bold text-slate-700 mb-1">{isAr ? "السعر المستهدف (د.ج):" : "Target Valuation (DZD):"}</label>
               <input 
                 type="number"
                 min="10"
@@ -331,13 +331,13 @@ export default function AppraiseForm({ listings, selectedListing, lang }: Apprai
                       {isAr ? "التقييم العادل لوساطة سيفانتا" : "SEVANTA FAIR VALUE RANGE"}
                     </span>
                     <h3 className="text-2xl font-black mt-2 font-mono text-cyan-300 flex items-baseline gap-1.5">
-                      ${report.estimatedValueMin.toLocaleString()} - ${report.estimatedValueMax.toLocaleString()}
-                      <span className="text-xs text-white uppercase font-sans">USD</span>
+                      {report.estimatedValueMin.toLocaleString()} - {report.estimatedValueMax.toLocaleString()}
+                      <span className="text-xs text-white uppercase font-sans">{isAr ? "د.ج" : "DZD"}</span>
                     </h3>
                     <p className="text-xs text-slate-300 mt-1" dir={isAr ? "rtl" : "ltr"}>
                       {isAr 
-                        ? `طلب المستخدم: $${initialPrice.toLocaleString()} (${report.estimatedValueMin <= initialPrice && initialPrice <= report.estimatedValueMax ? "مقبول وقريب للمتوسط" : "خارج منحنى المتوسط المقترح"})`
-                        : `Asking Price: $${initialPrice.toLocaleString()}`}
+                        ? `طلب المستخدم: ${initialPrice.toLocaleString()} د.ج (${report.estimatedValueMin <= initialPrice && initialPrice <= report.estimatedValueMax ? "مقبول وقريب للمتوسط" : "خارج منحنى المتوسط المقترح"})`
+                        : `Asking Price: ${initialPrice.toLocaleString()} DZD`}
                     </p>
                   </div>
                   

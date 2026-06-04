@@ -54,7 +54,7 @@ app.post("/api/gemini/appraise", async (req, res) => {
 
   const { title, category, year, condition, specifications, initialPrice, description } = req.body;
 
-  const prompt = `You are a professional maritime surveyor, appraiser and broker representing "Sevanta", the leading Mediterranean and Arabian Gulf marine brokerage platform.
+const prompt = `You are a professional maritime surveyor, appraiser and broker representing "Sevanta", the leading Algerian coastal marine brokerage platform.
 Evaluate the following item listed for maritime trade.
 
 Item Details:
@@ -66,19 +66,17 @@ Item Details:
 - User's Intended Price: ${initialPrice || "N/A"}
 - Brief Description: ${description || "N/A"}
 
-Please provide a highly detailed maritime evaluation report. Respond in Arabic. Output ONLY a valid JSON object matching the following structure:
+Please provide a highly detailed maritime evaluation report. Respond in Arabic. Output fair market valuations specifically calibrated for Algerian port transactions (in Algerian Dinars, e.g. millions of DZD / د.ج). Output ONLY a valid JSON object matching the following structure:
 {
-  "estimatedValueMin": number (minimum fair value in local currency/USD equivalent),
-  "estimatedValueMax": number (maximum fair value in local currency/USD equivalent),
+  "estimatedValueMin": number (minimum fair value in Algerian Dinars DZD / د.ج),
+  "estimatedValueMax": number (maximum fair value in Algerian Dinars DZD / د.ج),
   "confidenceScore": number (0 to 100 representing certainty of appraisal),
-  "reviewNotes": "highly descriptive analysis in Arabic focusing on structural factors, maintenance, age, and regional marine demand",
-  "pros": ["bullet points in Arabic highlighting key strengths, e.g. motor reliable, good hull, low operating hours"],
-  "cons": ["bullet points in Arabic highlighting key limitations or inspection checkpoints, e.g. needs sacrificial anode replacement, old electronics"],
+  "reviewNotes": "highly descriptive analysis in Arabic focusing on structural factors, maintenance, age, and Algerian marine demand specifically matching local ports like Bouharoun, Oran, Algiers, Bejaia or Annaba",
+  "pros": ["bullet points in Arabic highlighting key strengths relevant to Algerian fishing or leisure activities"],
+  "cons": ["bullet points in Arabic highlighting key limitations, rust vulnerabilities in Mediterranean saltwater, or inspection checkpoints"],
   "marketDemandRating": "High" | "Medium" | "Low",
-  "brokerRecommendation": "expert recommendation in Arabic regarding sale strategy, negotiation wiggle room, and prep advice"
-}
-
-Do not include any markdown format tags like \`\`\`json or trailing comments. Output raw JSON format that can be directly parsed.`;
+  "brokerRecommendation": "expert recommendation in Arabic regarding sale strategy in Algeria, negotiation wiggle room, and prep advice"
+}`;
 
   try {
     const response = await ai!.models.generateContent({
@@ -108,23 +106,23 @@ app.post("/api/gemini/negotiate", async (req, res) => {
     ? history.map((h: any) => `${h.sender === "buyer" ? "المشتري" : "البائع"}: ${h.text}`).join("\n")
     : "";
 
-  const prompt = `You are the lead mediator and marine broker of the "Sevanta" platform. Your task is to mediate the negotiation between a prospective buyer and a marine asset seller to close a deal on:
+  const prompt = `You are the lead mediator and marine broker of the "Sevanta" platform. Your task is to mediate the negotiation between a prospective buyer and a marine asset seller in Algeria to close a deal on:
 - Asset Name: "${itemTitle}"
-- Listed Price: ${itemPrice} USD
-- Last Buyer Offer: ${buyerOffer} USD
+- Listed Price: ${itemPrice} (in Algerian Dinars DZD / د.ج)
+- Last Buyer Offer: ${buyerOffer} (in Algerian Dinars DZD / د.ج)
 - Last message received: "${lastMessage || "None"}"
 
 Chat History:
 ${historyPrompt}
 
-You represent the objective, trusted mediator. Formulate an elegant, professional, and culturally appropriate response in Arabic. You aim to offer balanced compromises (e.g. suggesting middle-ground pricing, split transportation/licensing fees, or requiring dynamic vessel surveys).
+You represent the objective, trusted mediator in Algerian ports. Formulate an elegant, professional, and culturally appropriate response in Arabic. You aim to offer balanced compromises (e.g. suggesting middle-ground pricing in DZD / د.ج, split transportation/licensing fees, or requiring specific Algerian vessel surveys).
 Provide the response as JSON with this structure:
 {
-  "suggestionPrice": number (suggested fair middle-ground price in USD/currency),
-  "proposalDescription": "expert narrative in Arabic explaining this proposal and the benefits to both sides",
-  "buyerDraftMessage": "direct polite message draft in Arabic for the buyer/broker to send next",
-  "sellerDraftMessage": "direct polite message draft in Arabic for the seller/broker to send next",
-  "surveyRequirement": "suggested mandatory technical check in Arabic (e.g., Hull thickness, engine compression test) before finalizing"
+  "suggestionPrice": number (suggested fair middle-ground price in Algerian Dinars DZD / د.ج),
+  "proposalDescription": "expert narrative in Arabic explaining this proposal and the benefits to both sides using Algerian port contexts (e.g. Algiers, Tipaza, Oran)",
+  "buyerDraftMessage": "direct polite message draft in Arabic for the buyer/broker to send next using Algerian fraternal polite forms",
+  "sellerDraftMessage": "direct polite message draft in Arabic for the seller/broker to send next using Algerian fraternal polite forms",
+  "surveyRequirement": "suggested mandatory technical check in Arabic (e.g., Hull thickness, engine compression check in Algerian maintenance shipyards) before finalizing"
 }
 Ensure it is valid parseable JSON. Do not write markdown tags.`;
 

@@ -13,12 +13,12 @@ export default function ContractCenter({ listings, selectedListing, lang }: Cont
 
   // Form Fields
   const [selectedItemId, setSelectedItemId] = useState<string>("");
-  const [sellerName, setSellerName] = useState<string>("عبد الله بن محمد الجلاهمة");
-  const [buyerName, setBuyerName] = useState<string>("مروان بن صالح التونسي");
-  const [sellerId, setSellerId] = useState<string>("ID-988319");
-  const [buyerId, setBuyerId] = useState<string>("ID-766251");
-  const [itemPrice, setItemPrice] = useState<string>("185,000 USD");
-  const [deliveryPort, setDeliveryPort] = useState<string>("ميناء الدوحة البحري");
+  const [sellerName, setSellerName] = useState<string>("الحاج لخضر البوهاروني");
+  const [buyerName, setBuyerName] = useState<string>("مروان بن صالح الوهراني");
+  const [sellerId, setSellerId] = useState<string>("NID-213988319");
+  const [buyerId, setBuyerId] = useState<string>("NID-213766251");
+  const [itemPrice, setItemPrice] = useState<string>("28,000,000 د.ج");
+  const [deliveryPort, setDeliveryPort] = useState<string>("ميناء بوهارون، تيبازة");
   const [contractType, setContractType] = useState<string>("sale");
 
   // Output State
@@ -30,22 +30,34 @@ export default function ContractCenter({ listings, selectedListing, lang }: Cont
   useEffect(() => {
     if (selectedListing) {
       setSelectedItemId(selectedListing.id);
-      setItemPrice(`${selectedListing.price.toLocaleString()} USD`);
+      setItemPrice(`${selectedListing.price.toLocaleString()} ${isAr ? 'د.ج' : 'DZD'}`);
       setContractType(selectedListing.type);
+      const loc = isAr ? selectedListing.location : selectedListing.locationEn;
+      if (loc) {
+        setDeliveryPort(loc);
+      }
     } else if (listings.length > 0) {
       const first = listings[0];
       setSelectedItemId(first.id);
-      setItemPrice(`${first.price.toLocaleString()} USD`);
+      setItemPrice(`${first.price.toLocaleString()} ${isAr ? 'د.ج' : 'DZD'}`);
       setContractType(first.type);
+      const loc = isAr ? first.location : first.locationEn;
+      if (loc) {
+        setDeliveryPort(loc);
+      }
     }
-  }, [selectedListing, listings]);
+  }, [selectedListing, listings, isAr]);
 
   const handleSelectionChange = (id: string) => {
     setSelectedItemId(id);
     const item = listings.find(l => l.id === id);
     if (item) {
-      setItemPrice(`${item.price.toLocaleString()} USD`);
+      setItemPrice(`${item.price.toLocaleString()} ${isAr ? 'د.ج' : 'DZD'}`);
       setContractType(item.type);
+      const loc = isAr ? item.location : item.locationEn;
+      if (loc) {
+        setDeliveryPort(loc);
+      }
     }
   };
 

@@ -55,7 +55,7 @@ export default function ListingCard({ listing, lang, onSelect }: ListingCardProp
           <span className="text-cyan-400 font-bold">
             {listing.price.toLocaleString()}
           </span>
-          <span className="text-[10px] text-slate-300">USD</span>
+          <span className="text-[10px] text-slate-300">{isAr ? "د.ج" : "DZD"}</span>
         </div>
 
         {/* Trade Type Overlay */}

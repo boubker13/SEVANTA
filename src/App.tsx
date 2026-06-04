@@ -69,7 +69,23 @@ export default function App() {
     const saved = localStorage.getItem("sevanta_listings_db");
     if (saved) {
       try {
-        setListings(JSON.parse(saved));
+        const parsed = JSON.parse(saved);
+        const hasEgyptOrGulf = parsed.some((item: any) => 
+          item.location?.includes("الإسكندرية") || 
+          item.location?.includes("مصر") || 
+          item.locationEn?.includes("Alexandria") || 
+          item.locationEn?.includes("Egypt") ||
+          item.location?.includes("الدوحة") ||
+          item.location?.includes("قطر") ||
+          item.locationEn?.includes("Doha") ||
+          item.locationEn?.includes("Qatar")
+        );
+        if (hasEgyptOrGulf || parsed.length === 0) {
+          setListings(INITIAL_LISTINGS);
+          localStorage.setItem("sevanta_listings_db", JSON.stringify(INITIAL_LISTINGS));
+        } else {
+          setListings(parsed);
+        }
       } catch (e) {
         setListings(INITIAL_LISTINGS);
       }
@@ -144,12 +160,12 @@ export default function App() {
       conditionEn: newCondition === "new" ? "Brand New" : "Excellent Used",
       specifications: newSpecs || "طول قياسي مقاوم للأملاح والظروف البحرية القاسية.",
       specificationsEn: newSpecsEn || "Standard marine-grade build resilient to saltwater corroding.",
-      location: newLocation || "ميناء الدوحة الشاطئي",
-      locationEn: newLocationEn || "Doha Sea Port Marina",
+      location: newLocation || "ميناء الجزائر العاصمة",
+      locationEn: newLocationEn || "Algiers Sea Port Marina",
       type: newType,
       image: finalImageUrl,
       ownerName: newOwnerName || "ربان سيفانتا البحري المعتمد",
-      ownerPhone: newOwnerPhone || "+212 555-9876",
+      ownerPhone: newOwnerPhone || "+213 550-123456",
       ownerId: "own_" + Math.random().toString(36).substr(2, 5),
       description: newDesc || "عتاد بحري ممتاز جاهز للمعاينة الفنية والتفتيش المباشر.",
       descriptionEn: newDescEn || "Superb maritime hardware ready for structural inspection and port tests."
@@ -413,7 +429,7 @@ export default function App() {
 
                     {/* Value registration */}
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 mb-1">{isAr ? "القيمة التجارية المقررة ($ USD):" : "Initial Target Valuation ($ USD):"}</label>
+                      <label className="block text-xs font-bold text-slate-700 mb-1">{isAr ? "القيمة التجارية المقررة (د.ج):" : "Initial Target Valuation (DZD):"}</label>
                       <input 
                         type="number" min="10" required 
                         value={newPrice} onChange={(e) => setNewPrice(parseInt(e.target.value) || 0)}
@@ -449,7 +465,7 @@ export default function App() {
                     <div>
                       <label className="block text-xs font-bold text-slate-700 mb-1">{isAr ? "ميناء الرسو الحالي (عربي):" : "Current Port / Location (Arabic):"}</label>
                       <input 
-                        type="text" required placeholder="مثال: ميناء صيد قابس، تونس"
+                        type="text" required placeholder="مثال: ميناء بوهارون، تيبازة"
                         value={newLocation} onChange={(e) => setNewLocation(e.target.value)}
                         className="w-full bg-slate-50 border rounded-lg p-2 text-xs focus:bg-white focus:border-cyan-500 font-sans"
                       />
@@ -457,7 +473,7 @@ export default function App() {
                     <div>
                       <label className="block text-xs font-bold text-slate-700 mb-1">{isAr ? "ميناء الرسو الحالي (إنجليزي):" : "Current Port / Location (English):"}</label>
                       <input 
-                        type="text" required placeholder="Example: Fishing Port of Gabes, Tunisia"
+                        type="text" required placeholder="Example: Port of Bouharoun, Tipaza"
                         value={newLocationEn} onChange={(e) => setNewLocationEn(e.target.value)}
                         className="w-full bg-slate-50 border rounded-lg p-2 text-xs focus:bg-white focus:border-cyan-500 font-sans"
                       />
@@ -538,7 +554,7 @@ export default function App() {
                       <div>
                         <label className="block text-xs font-bold text-slate-700 mb-1">{isAr ? "وصف وملاحظات عامة للسمسمار (عربي):" : "Broker Notes & Narrative (Arabic):"}</label>
                         <textarea 
-                          rows={2} required placeholder="مثال: السفينة نظيفة تخلوا من التشققات وجاهزة للمعاينة في الحوض الجاف في ميناء طنجة."
+                          rows={2} required placeholder="مثال: السفينة نظيفة تخلوا من التشققات وجاهزة للمعاينة في الحوض الجاف في ميناء وهران."
                           value={newDesc} onChange={(e) => setNewDesc(e.target.value)}
                           className="w-full bg-slate-50 border rounded-lg p-2 text-xs focus:bg-white focus:border-cyan-500 font-sans"
                         />
@@ -546,7 +562,7 @@ export default function App() {
                       <div>
                         <label className="block text-xs font-bold text-slate-700 mb-1">{isAr ? "وصف وملاحظات عامة للسمسمار (إنجليزي):" : "Broker Notes & Narrative (English):"}</label>
                         <textarea 
-                          rows={2} required placeholder="Example: The boat is pristine, has no structural cracks, ready for dry dock inspection at Tangier."
+                          rows={2} required placeholder="Example: The boat is pristine, has no structural cracks, ready for dry dock inspection at Oran."
                           value={newDescEn} onChange={(e) => setNewDescEn(e.target.value)}
                           className="w-full bg-slate-50 border rounded-lg p-2 text-xs focus:bg-white focus:border-cyan-500 font-sans"
                         />
