@@ -1,5 +1,6 @@
 import React from "react";
 import { Anchor, Globe, Ship, Percent, Coins } from "lucide-react";
+import SevantaLogo from "./SevantaLogo";
 
 interface HeaderProps {
   lang: "ar" | "en";
@@ -11,13 +12,13 @@ export default function Header({ lang, setLang, listingCount }: HeaderProps) {
   const isAr = lang === "ar";
 
   return (
-    <header className="bg-gradient-to-r from-slate-900 via-sky-950 to-slate-900 text-white shadow-2xl py-4 px-6 border-b-4 border-cyan-500">
+    <header className="bg-gradient-to-r from-slate-900 via-sky-950 to-slate-900 text-white shadow-2xl py-3 px-6 border-b-4 border-cyan-500">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
         
         {/* Brand & Identity as requested in user uploaded image */}
-        <div className="flex items-center gap-4">
-          <div className="bg-gradient-to-tr from-cyan-400 to-sky-600 p-3 rounded-full shadow-lg border border-cyan-300 animate-pulse">
-            <Ship className="w-8 h-8 text-slate-950" />
+        <div className="flex items-center gap-3">
+          <div className="bg-slate-950 p-1 rounded-full shadow-lg border-2 border-cyan-400 hover:scale-105 active:scale-95 transition-all duration-300">
+            <SevantaLogo size={68} className="animate-fade-in" />
           </div>
           <div>
             <div className="flex items-baseline gap-2">
@@ -25,7 +26,7 @@ export default function Header({ lang, setLang, listingCount }: HeaderProps) {
                 sevanta
               </span>
               <span className="text-[10px] text-cyan-300 border border-cyan-400/40 px-2 py-0.5 rounded-full font-mono">
-                {isAr ? "الوساطة الذكية" : "Smart Broker"}
+                {isAr ? "الوساطة الجزائرية" : "Algerian Brokerage"}
               </span>
             </div>
             <p className="text-xs tracking-wider opacity-90 text-cyan-100 font-sans mt-0.5">
